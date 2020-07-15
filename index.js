@@ -1,20 +1,18 @@
 let cronometro = (function (){
+    //váriaveis de declaração de hora, minuto, segundo, estado do cronometro,intervalo de tempo que será usado e o própria cornometro para receber a função de tempo
+    let temporizador = document.getElementById('temporizador');
     let cronoParado = true;
-    let hh = 0;
-    let mm = 0;
-    let ss = 0;
     let intervalo = 1000;
     let cron;
-    function iniciar(){
+    //função de iniciar que chama a função tempo usando um intervalo ná determinado para executa-la
+    function iniciar(){ 
         if(cronoParado){
-            cronoParado = false;
-            cron = setInterval(() =>{
-            tempo();
+            cronoParado = false;//declara que quando iniada essa função o conometro não está mais parado
+            cron = setInterval(() =>{//chama a função de tempo usando o intervalo determinado
+            estaticas.tempo();
             }, intervalo);  
         }
     }
-
-
     function parar(){
         clearInterval(cron);
         cronoParado = true;
@@ -22,16 +20,28 @@ let cronometro = (function (){
     }
 
     function zerar(){
-        hh = 0;
-        mm = 0;
-        ss = 0;
+        estaticas.hh = 0;
+        estaticas.mm = 0;
+        estaticas.ss = 0;
         clearInterval(cron);
         cronoParado = true;
 
-        document.getElementById('temporizador').innerText = '00:00:00';
+        temporizador.innerText = '00:00:00';
 
     }
 
+    return{
+    iniciar,
+    parar,
+    zerar
+    }
+
+})()
+
+let estaticas = (function(){
+    let hh = 0;
+    let mm = 0;
+    let ss = 0;
     function tempo(){
         ss++
 
@@ -47,17 +57,12 @@ let cronometro = (function (){
 
         let format = (hh < 10 ? '0' + hh: hh)+ ':' +(mm < 10 ? '0' + mm: mm)+ ':' +(ss < 10 ? '0' + ss: ss);
 
-        document.getElementById('temporizador').innerText = format;
+        temporizador.innerText = format;
 
         return {
             format
         }
 
     }
-
-    return{
-    iniciar,
-    parar,
-    zerar
-    }
+    return {tempo}
 })()
