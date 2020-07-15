@@ -9,7 +9,7 @@ let cronometro = (function (){
         if(cronoParado){
             cronoParado = false;//declara que quando iniada essa função o conometro não está mais parado
             cron = setInterval(() =>{//chama a função de tempo usando o intervalo determinado
-            estaticas.tempo();
+            internas.tempo();
             }, intervalo);  
         }
     }
@@ -20,9 +20,9 @@ let cronometro = (function (){
     }
 
     function zerar(){
-        estaticas.hh = 0;
-        estaticas.mm = 0;
-        estaticas.ss = 0;
+        internas.hh = 0;
+        internas.mm = 0;
+        internas.ss = 0;
         clearInterval(cron);
         cronoParado = true;
 
@@ -38,7 +38,7 @@ let cronometro = (function (){
 
 })()
 
-let estaticas = (function(){
+let internas = (function(){
     let hh = 0;
     let mm = 0;
     let ss = 0;
